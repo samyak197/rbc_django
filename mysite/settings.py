@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load sensitive information from environment variables
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: Don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # Allowed hosts specified for your deployment domain on Vercel
@@ -38,9 +38,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# URL configuration
 ROOT_URLCONF = 'mysite.urls'
 
-# Templating configuration
+# Templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -57,21 +58,22 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application configuration
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Database configuration: Use a production-ready database (e.g. PostgreSQL) in production
+# Database configuration: Use SQLite as a default option, change as needed
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DJANGO_DATABASE_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.environ.get('DJANGO_DATABASE_NAME', 'your_database_name'),
-        'USER': os.environ.get('DJANGO_DATABASE_USER', 'your_database_user'),
-        'PASSWORD': os.environ.get('DJANGO_DATABASE_PASSWORD', 'your_database_password'),
-        'HOST': os.environ.get('DJANGO_DATABASE_HOST', 'localhost'),
-        'PORT': os.environ.get('DJANGO_DATABASE_PORT', '5432'),
+        'ENGINE': os.environ.get('DJANGO_DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DJANGO_DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.environ.get('DJANGO_DATABASE_USER', ''),
+        'PASSWORD': os.environ.get('DJANGO_DATABASE_PASSWORD', ''),
+        'HOST': os.environ.get('DJANGO_DATABASE_HOST', ''),
+        'PORT': os.environ.get('DJANGO_DATABASE_PORT', ''),
     }
 }
 
-# Password validation configuration
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -87,7 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization configuration
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -98,28 +100,26 @@ USE_TZ = True
 
 # Static files configuration
 STATIC_URL = '/static/'
-
-# Define static root directory for production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Static files configuration for serving static files on Vercel
+# Static files directories (if any)
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Background tasks configuration
+# Background task configuration
 BACKGROUND_TASK_RUN_ASYNC = True
 
-# Channels configuration (you may want to use a different backend in production)
+# Channels configuration (consider using a different backend in production)
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # Use a different backend in production (e.g., Redis)
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     }
 }
 
-# CORS settings
-CORS_ALLOW_ALL_ORIGINS = False  # More secure approach than allowing all origins
+# CORS configuration
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
 
 # Ensure you configure the necessary settings for your project
