@@ -5,7 +5,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load sensitive information from environment variables
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-secret-key')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-mvo)v1ha_pmk63fk=*eph*v#g-5_t6je#8a2hi5bmc&(x-f970')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
@@ -20,8 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rbc',
+    'django.contrib.staticfiles',  # You can keep this, even though you don't use static files
+    'rbc',  # Add your application name here
     'background_task',
     'rest_framework',
     'corsheaders',
@@ -59,15 +59,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Database configuration: Use a production-ready database (e.g. PostgreSQL) in production
+# Database configuration: Use an in-memory database for simplicity
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DJANGO_DATABASE_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.environ.get('DJANGO_DATABASE_NAME', 'your_database_name'),
-        'USER': os.environ.get('DJANGO_DATABASE_USER', 'your_database_user'),
-        'PASSWORD': os.environ.get('DJANGO_DATABASE_PASSWORD', 'your_database_password'),
-        'HOST': os.environ.get('DJANGO_DATABASE_HOST', 'localhost'),
-        'PORT': os.environ.get('DJANGO_DATABASE_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',  # You can use sqlite3 for simplicity
+        'NAME': ':memory:',  # Use an in-memory database if you don't want persistence
     }
 }
 
@@ -97,24 +93,15 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files configuration
-STATIC_URL = '/static/'
-
-# Define static root directory for production
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Static files configuration for serving static files on Vercel
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = '/static/'  # You can keep this, even though you don't use static files
 
 # Background tasks configuration
 BACKGROUND_TASK_RUN_ASYNC = True
 
-# Channels configuration (you may want to use a different backend in production)
+# Channels configuration (use a different backend in production if needed)
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # Use a different backend in production (e.g., Redis)
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # Use a different backend in production if needed (e.g., Redis)
     }
 }
 
@@ -122,4 +109,4 @@ CHANNEL_LAYERS = {
 CORS_ALLOW_ALL_ORIGINS = False  # More secure approach than allowing all origins
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
 
-# Ensure you configure the necessary settings for your project
+# Additional configurations specific to your project may be added here
