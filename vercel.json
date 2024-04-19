@@ -20,6 +20,26 @@
             "dest": "mysite/wsgi.py"
         },
         {
+            "src": "/rbc/take_input/",
+            "dest": "mysite/wsgi.py"
+        },
+        {
+            "src": "/rbc/data_collection/",
+            "dest": "mysite/wsgi.py"
+        },
+        {
+            "src": "/rbc/training/",
+            "dest": "mysite/wsgi.py"
+        },
+        {
+            "src": "/rbc/testing/",
+            "dest": "mysite/wsgi.py"
+        },
+        {
+            "src": "/rbc/download_model/",
+            "dest": "mysite/wsgi.py"
+        },
+        {
             "src": "/(.*)",
             "dest": "mysite/wsgi.py"
         }
