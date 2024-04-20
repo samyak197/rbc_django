@@ -20,4 +20,8 @@
             "dest": "mysite/wsgi.py"
         }
     ]
+  "rewrites": [
+    { "source": "/", "destination": "/rbc/take_input" }
+  ]
 }
+
