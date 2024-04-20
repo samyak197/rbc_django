@@ -12,12 +12,8 @@
     ],
     "routes": [
         {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "mysite/wsgi.py"
+            "src": "/rbc/take_input",
+            "dest": "rbc/take_input"
         }
     ]
   "rewrites": [
